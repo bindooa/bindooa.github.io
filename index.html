@@ -3,44 +3,491 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bindooa — Mobile Apps</title>
+<title>Bindooa — Mobile App Studio</title>
+<meta name="description" content="Bindooa is an independent mobile app studio publishing consumer Android apps — personalization first, utilities on the way. Crafted in Vietnam.">
+<meta property="og:title" content="Bindooa — Mobile App Studio">
+<meta property="og:description" content="An independent studio publishing consumer Android apps. Effortless apps, honest ads, boring data.">
+<meta name="theme-color" content="#06120b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='44' y='4' width='6' height='14' rx='3' fill='%231f9d55'/%3E%3Ccircle cx='47' cy='6' r='5' fill='%23c8f542'/%3E%3Crect x='6' y='14' width='52' height='44' rx='15' fill='%232ee06f'/%3E%3Crect x='13' y='26' width='38' height='20' rx='10' fill='%23071a0f'/%3E%3Crect x='20' y='30' width='7' height='12' rx='3.5' fill='%23c8f542'/%3E%3Crect x='37' y='30' width='7' height='12' rx='3.5' fill='%23c8f542'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;margin:0;color:#1f2430;background:#f7f8fa;line-height:1.6}
-  .wrap{max-width:720px;margin:0 auto;padding:48px 24px}
-  header h1{margin:0 0 8px;font-size:2rem}
-  header p{color:#5a6272;margin:0 0 32px}
-  .card{background:#fff;border:1px solid #e3e6ec;border-radius:12px;padding:24px;margin-bottom:16px}
-  .card h2{margin:0 0 4px;font-size:1.15rem}
-  .card p{margin:0 0 12px;color:#5a6272}
-  .card p:last-child{margin-bottom:0}
-  a{color:#2456d6}
-  footer{margin-top:40px;font-size:.9rem;color:#8a90a0}
+  :root{
+    --ground:#06120b;
+    --ground-2:#0b1d11;
+    --line:rgba(140,240,175,.14);
+    --text:#eafff2;
+    --text-2:#9fd8b4;
+    --green:#2ee06f;
+    --green-deep:#1f9d55;
+    --lime:#c8f542;
+    --ink:#06120b;
+    --ink-2:#0b4d26;
+    --radius:28px;
+    --font-display:"Bricolage Grotesque",Georgia,serif;
+    --font-body:"Hanken Grotesk",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--ground);
+    color:var(--text);
+    line-height:1.65;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--lime);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
+  html{scrollbar-width:thin;scrollbar-color:var(--green-deep) transparent}
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:var(--ground)}
+  ::-webkit-scrollbar-thumb{background:var(--green-deep);border-radius:99px;border:2px solid var(--ground)}
+  a{color:inherit;text-decoration-thickness:1.5px;text-underline-offset:4px}
+  img,svg{max-width:100%;display:block}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb,var(--ground) 82%,transparent);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;gap:32px;height:72px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--font-display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em}
+  .brand svg{width:34px;height:34px}
+  .nav-links{display:flex;gap:28px;margin-left:auto}
+  .nav-links a{text-decoration:none;font-weight:600;font-size:.95rem;color:var(--text-2);transition:color .18s ease}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--green);color:var(--ink);
+    font-weight:700;font-size:.98rem;font-family:var(--font-body);
+    padding:12px 24px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;
+    transition:transform .18s cubic-bezier(.2,.9,.3,1),box-shadow .18s ease,background .18s ease;
+    box-shadow:0 10px 22px -12px rgba(0,0,0,.55);
+  }
+  .btn:hover{transform:translateY(-2px);background:#43ea80;box-shadow:0 16px 28px -14px rgba(0,0,0,.6)}
+  .btn:active{transform:translateY(0)}
+  .btn svg{width:17px;height:17px}
+  .nav .btn{margin-left:8px;padding:10px 20px}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden}
+  .hero::before{ /* dot field */
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(140,240,175,.13) 1px,transparent 1px);
+    background-size:26px 26px;
+    mask-image:radial-gradient(ellipse 75% 70% at 68% 42%,#000 30%,transparent 72%);
+    -webkit-mask-image:radial-gradient(ellipse 75% 70% at 68% 42%,#000 30%,transparent 72%);
+  }
+  .hero::after{ /* glow */
+    content:"";position:absolute;width:780px;height:780px;right:-190px;top:-140px;
+    background:radial-gradient(circle,rgba(46,224,111,.22) 0%,rgba(46,224,111,.07) 42%,transparent 68%);
+    pointer-events:none;
+  }
+  .hero-in{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+    align-items:center;gap:36px;
+    padding:76px 0 64px;min-height:calc(100svh - 72px);
+  }
+  h1{
+    font-family:var(--font-display);font-weight:800;
+    font-size:clamp(2.9rem,6.6vw,5.4rem);
+    line-height:1.01;letter-spacing:-.035em;text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--green)}
+  .hero p{margin:26px 0 36px;max-width:34rem;font-size:1.16rem;color:var(--text-2)}
+  .hero-cta{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+  .link-arrow{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;color:var(--text)}
+  .link-arrow svg{width:16px;height:16px;transition:transform .2s cubic-bezier(.2,.9,.3,1)}
+  .link-arrow:hover svg{transform:translateY(3px)}
+  .link-arrow:hover{text-decoration:underline}
+  .rise{animation:rise .9s cubic-bezier(.16,1,.3,1) backwards}
+  .rise-2{animation-delay:.08s}
+  .rise-3{animation-delay:.16s}
+  @keyframes rise{from{opacity:.01;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+  /* mascot */
+  .mascot{position:relative;justify-self:center;width:min(430px,100%)}
+  .mascot-float{animation:float 6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .eye{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+  @keyframes blink{0%,91%,100%{transform:scaleY(1)}94%{transform:scaleY(.08)}97%{transform:scaleY(1)}}
+  .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.25;transform:scale(1)}50%{opacity:.55;transform:scale(1.35)}}
+  .wave{transform-box:fill-box;transform-origin:80% 92%;animation:wave 3.4s ease-in-out infinite}
+  @keyframes wave{0%,58%,100%{transform:rotate(0)}68%{transform:rotate(-9deg)}78%{transform:rotate(5deg)}88%{transform:rotate(-6deg)}}
+  .heart{transform-box:fill-box;transform-origin:center;animation:beat 2.2s ease-in-out infinite}
+  @keyframes beat{0%,55%,100%{transform:scale(1)}62%{transform:scale(1.22)}70%{transform:scale(1)}}
+
+  /* ---------- tag strip ---------- */
+  .strip{border-block:1px solid var(--line);padding:19px 24px}
+  .strip-in{display:flex;justify-content:center;column-gap:30px;row-gap:8px;flex-wrap:wrap}
+  .strip-in span{
+    font-weight:600;font-size:.84rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--text-2);white-space:nowrap;
+  }
+  @media (min-width:1024px){
+    .strip-in{column-gap:0}
+    .strip-in span:not(:last-child)::after{content:"·" / "";color:var(--green);padding:0 18px}
+  }
+
+  /* ---------- sections ---------- */
+  section{scroll-margin-top:90px}
+  h2{
+    font-family:var(--font-display);font-weight:800;
+    font-size:clamp(2.1rem,4.4vw,3.4rem);
+    line-height:1.05;letter-spacing:-.03em;text-wrap:balance;
+  }
+  .section-pad{padding:110px 0}
+
+  /* what we do — editorial rows */
+  .work-head{max-width:44rem;margin-bottom:26px}
+  .work-head p{margin-top:18px;color:var(--text-2);font-size:1.08rem;max-width:36rem}
+  .row{
+    display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+    gap:28px;align-items:start;
+    border-top:1px solid var(--line);padding:46px 0;
+  }
+  .row:last-child{border-bottom:1px solid var(--line)}
+  .row-title{display:flex;align-items:center;gap:18px}
+  .row-title svg{width:44px;height:44px;flex:none;color:var(--lime);transition:transform .25s cubic-bezier(.2,.9,.3,1)}
+  .row:hover .row-title svg{transform:translateY(-4px) rotate(-4deg)}
+  .row-title h3{font-family:var(--font-display);font-weight:700;font-size:2.05rem;letter-spacing:-.02em;transition:color .2s ease}
+  .row:hover .row-title h3{color:var(--green)}
+  .row p{color:var(--text-2);max-width:56ch;font-size:1.06rem}
+  .row p strong{color:var(--text);font-weight:600}
+
+  /* manifesto — green band */
+  .manifesto{background:var(--green);color:var(--ink);padding:104px 0;position:relative;overflow:hidden}
+  .manifesto .wrap{position:relative;z-index:1}
+  .manifesto-ghost{position:absolute;right:-24px;bottom:-140px;width:540px;height:540px;opacity:.42;transform:rotate(-9deg);pointer-events:none}
+  .manifesto h2{font-size:clamp(2.6rem,7vw,5.4rem);line-height:1.03}
+  .manifesto h2 span{display:block}
+  .manifesto h2 .dim{color:var(--ink-2)}
+  .manifesto p{margin-top:30px;max-width:36rem;font-size:1.14rem;font-weight:500;color:#0a3d1f}
+
+  /* about */
+  .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:start}
+  .about-copy p{color:var(--text-2);margin-top:20px;max-width:58ch;font-size:1.08rem}
+  .about-copy p strong{color:var(--text);font-weight:600}
+  .fact-list{list-style:none;border-top:1px solid var(--line);margin-top:6px}
+  .fact-list li{
+    display:flex;justify-content:space-between;gap:18px;align-items:baseline;
+    border-bottom:1px solid var(--line);padding:17px 2px;
+  }
+  .fact-list .k{color:var(--text-2);font-size:.95rem}
+  .fact-list .v{font-family:var(--font-display);font-weight:700;font-size:1.12rem;letter-spacing:-.01em;text-align:right}
+
+  /* contact */
+  .contact-card{
+    position:relative;
+    background:linear-gradient(160deg,var(--ground-2),#081609 78%);
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:72px 56px;overflow:hidden;
+  }
+  .contact-card::after{
+    content:"";position:absolute;width:520px;height:520px;right:-160px;bottom:-260px;
+    background:radial-gradient(circle,rgba(46,224,111,.18),transparent 65%);
+    pointer-events:none;
+  }
+  .contact-in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:36px;align-items:center}
+  .contact-card p{color:var(--text-2);margin-top:16px;max-width:34rem;font-size:1.1rem}
+  .contact-card .btn{padding:16px 32px;font-size:1.05rem}
+  .peek{position:absolute;right:42px;top:-6px;width:92px;opacity:.95;transform:rotate(7deg)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:44px 0 52px;margin-top:110px}
+  .foot{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+  .foot .brand{font-size:1.15rem}
+  .foot .brand svg{width:28px;height:28px}
+  .foot-links{display:flex;gap:24px;margin-left:auto;flex-wrap:wrap}
+  .foot-links a{font-size:.94rem;color:var(--text-2);text-decoration:none}
+  .foot-links a:hover{color:var(--text);text-decoration:underline}
+  .foot-note{margin-top:20px;color:var(--text-2);font-size:.88rem}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:880px){
+    .hero-in{grid-template-columns:1fr;min-height:0;padding:56px 0 40px;gap:20px}
+    .mascot{width:min(320px,82%);order:-1;margin-top:8px}
+    .hero p{margin:20px 0 28px}
+    .about{grid-template-columns:1fr;gap:30px}
+    .row{grid-template-columns:1fr;gap:14px;padding:38px 0}
+    .contact-in{grid-template-columns:1fr;gap:26px}
+    .contact-card{padding:52px 30px}
+    .peek{display:none}
+    .section-pad{padding:76px 0}
+    .manifesto{padding:78px 0}
+    .manifesto-ghost{width:240px;height:240px;right:-60px;bottom:-70px}
+    footer{margin-top:76px}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .nav-in{gap:16px}
+    .nav .btn{margin-left:auto}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rise,.mascot-float,.eye,.pulse,.wave,.heart{animation:none}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Bindooa</h1>
-    <p>We build simple, useful mobile apps.</p>
-  </header>
+<!--
+THESIS: a new one-person studio earns publisher-grade trust by looking like it already
+ships with big-studio discipline — refusing the pastel template-and-stock-photo small-dev page.
+OWN-WORLD: near-black green ground, vivid #2ee06f green committed at band scale, lime
+signals, Bricolage Grotesque display at poster scale, Hanken Grotesk text, one hand-drawn
+robot-dinosaur mascot as the only imagery.
+STORY: visitor lands, reads confidence, meets the dino, learns the studio builds/grows/cares
+honestly, and emails.
+FIRST VIEWPORT: nav; left — 3-line poster headline, sub, green pill CTA; right — floating
+waving dino in a green glow over a dot field.
+FORM: user-pinned canon (codeway.co dark studio page), executed in green; no seed roll.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review,
+the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
 
-  <div class="card">
-    <h2>Wallume: HD 4K Wallpapers</h2>
-    <p>Stunning HD &amp; 4K wallpapers for your Android phone — dark, neon, aesthetic and more. Fresh backgrounds added regularly, with live video wallpapers coming soon.</p>
-    <p><a href="#">Get it on Google Play</a></p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="dinoBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3ce67f"/>
+      <stop offset="1" stop-color="#1fb45f"/>
+    </linearGradient>
+    <symbol id="dino-head" viewBox="0 0 64 64">
+      <rect x="44" y="4" width="6" height="14" rx="3" fill="#1f9d55"/>
+      <circle cx="47" cy="6" r="5" fill="#c8f542"/>
+      <rect x="6" y="14" width="52" height="44" rx="15" fill="url(#dinoBody)"/>
+      <rect x="13" y="26" width="38" height="20" rx="10" fill="#071a0f"/>
+      <rect x="20" y="30" width="7" height="12" rx="3.5" fill="#c8f542"/>
+      <rect x="37" y="30" width="7" height="12" rx="3.5" fill="#c8f542"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Bindooa home">
+      <svg aria-hidden="true"><use href="#dino-head"/></svg>
+      Bindooa
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#work">What we do</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn" href="mailto:trungnguyentcg@gmail.com">Get in touch</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <h1 class="rise">We make phones feel <em>personal.</em></h1>
+        <p class="rise rise-2">Bindooa is an independent app studio publishing consumer
+        apps for Android — designed with care, grown with honest numbers, and looked
+        after long past launch.</p>
+        <div class="hero-cta rise rise-3">
+          <a class="btn" href="mailto:trungnguyentcg@gmail.com">Get in touch</a>
+          <a class="link-arrow" href="#work">See how we work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16"/><path d="m6 14 6 6 6-6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="mascot" role="img" aria-label="Byte, the Bindooa robot dinosaur mascot, waving">
+        <div class="mascot-float">
+        <svg viewBox="0 0 520 560" fill="none" aria-hidden="true">
+          <!-- ground shadow -->
+          <ellipse cx="256" cy="532" rx="158" ry="17" fill="rgba(0,0,0,.4)"/>
+          <!-- tail -->
+          <path d="M346 400 C 424 428, 478 400, 474 340 C 472 316 454 302 436 310 C 452 342 438 376 396 384 C 372 388 358 380 346 366 Z" fill="#1f9d55"/>
+          <path d="M452 306 L 474 280 Q 486 302 476 318 Z" fill="#178a49" stroke="#178a49" stroke-width="10" stroke-linejoin="round"/>
+          <!-- head plates -->
+          <path d="M232 16 L 262 62 Q 230 74 202 58 Z" fill="#1c9e57" stroke="#1c9e57" stroke-width="14" stroke-linejoin="round"/>
+          <path d="M158 40 L 180 74 Q 156 82 136 70 Z" fill="#178a49" stroke="#178a49" stroke-width="12" stroke-linejoin="round"/>
+          <!-- antenna -->
+          <rect x="332" y="18" width="10" height="52" rx="5" fill="#1f9d55"/>
+          <circle class="pulse" cx="337" cy="16" r="22" fill="#c8f542"/>
+          <circle cx="337" cy="16" r="11" fill="#c8f542"/>
+          <!-- legs -->
+          <rect x="172" y="416" width="66" height="98" rx="30" fill="#22a75b"/>
+          <rect x="282" y="416" width="66" height="98" rx="30" fill="#22a75b"/>
+          <ellipse cx="205" cy="508" rx="40" ry="16" fill="#2bbf63"/>
+          <ellipse cx="315" cy="508" rx="40" ry="16" fill="#2bbf63"/>
+          <!-- left arm -->
+          <g transform="rotate(14 158 344)">
+            <rect x="136" y="296" width="44" height="102" rx="22" fill="#22a75b"/>
+            <circle cx="158" cy="396" r="21" fill="#2ee06f"/>
+          </g>
+          <!-- body -->
+          <rect x="150" y="250" width="220" height="186" rx="66" fill="url(#dinoBody)"/>
+          <!-- belly -->
+          <rect x="188" y="296" width="144" height="120" rx="46" fill="#c9f7d6"/>
+          <rect x="214" y="322" width="92" height="66" rx="15" fill="#0a1f12"/>
+          <path class="heart" d="M248 342h8v7h8v-7h8v13l-12 11-12-11z" fill="#c8f542"/>
+          <!-- right arm (waving) -->
+          <g transform="rotate(34 366 300)">
+            <g class="wave">
+              <rect x="344" y="186" width="44" height="120" rx="22" fill="#22a75b"/>
+              <circle cx="366" cy="188" r="24" fill="#2ee06f"/>
+              <path d="M355 176 v-10 M366 173 v-12 M377 176 v-10" stroke="#22a75b" stroke-width="7" stroke-linecap="round"/>
+            </g>
+          </g>
+          <!-- ear pods -->
+          <rect x="92" y="126" width="28" height="66" rx="14" fill="#1f9d55"/>
+          <rect x="400" y="126" width="28" height="66" rx="14" fill="#1f9d55"/>
+          <!-- head -->
+          <rect x="108" y="52" width="304" height="212" rx="72" fill="url(#dinoBody)"/>
+          <!-- visor -->
+          <rect x="142" y="106" width="236" height="106" rx="50" fill="#08160d"/>
+          <rect x="142" y="106" width="236" height="106" rx="50" stroke="rgba(200,245,66,.16)" stroke-width="2"/>
+          <!-- eyes -->
+          <rect class="eye" x="198" y="134" width="30" height="48" rx="13" fill="#c8f542"/>
+          <rect class="eye" x="292" y="134" width="30" height="48" rx="13" fill="#c8f542"/>
+          <!-- nostrils -->
+          <circle cx="240" cy="238" r="5" fill="#128a48"/>
+          <circle cx="280" cy="238" r="5" fill="#128a48"/>
+          <!-- screws -->
+          <circle cx="134" cy="80" r="3.5" fill="rgba(7,26,15,.3)"/>
+          <circle cx="386" cy="80" r="3.5" fill="rgba(7,26,15,.3)"/>
+        </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-in">
+      <span>Personalization apps</span><span>Utilities</span><span>Android</span>
+      <span>Independent since 2026</span><span>Crafted in Vietnam</span>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>Legal</h2>
-    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a></p>
-  </div>
+  <section id="work" class="section-pad">
+    <div class="wrap">
+      <div class="work-head">
+        <h2>Three jobs. Done properly.</h2>
+        <p>Every app we publish goes through the same three disciplines — no shortcuts
+        on any of them.</p>
+      </div>
 
-  <div class="card">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:trungnguyentcg@gmail.com">trungnguyentcg@gmail.com</a></p>
-  </div>
+      <div class="row">
+        <div class="row-title">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 6 40 15v18L24 42 8 33V15Z"/>
+            <path d="M8 15l16 9 16-9"/>
+            <path d="M24 24v18"/>
+          </svg>
+          <h3>Build</h3>
+        </div>
+        <p><strong>Small, fast, native.</strong> We sweat cold-start milliseconds and
+        60&nbsp;fps scrolling, keep downloads light, and polish the details users can't
+        name but always feel. If it doesn't feel effortless, it doesn't ship.</p>
+      </div>
 
-  <footer>&copy; 2026 Bindooa. All rights reserved.</footer>
-</div>
+      <div class="row">
+        <div class="row-title">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 41V21"/>
+            <path d="M24 21c0-8 5-13 13-13 0 8-5 13-13 13Z"/>
+            <path d="M24 29c0-6-4-10-10-10 0 6 4 10 10 10Z"/>
+            <path d="M14 41h20"/>
+          </svg>
+          <h3>Grow</h3>
+        </div>
+        <p><strong>Measured, not loud.</strong> We grow with numbers we can defend —
+        honest store listings, clean attribution, and ads that never trick a tap.
+        A user who feels cheated once is gone forever, so nothing we ship is allowed
+        to cheat.</p>
+      </div>
+
+      <div class="row">
+        <div class="row-title">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 5 8 11v12c0 10 6.5 16.5 16 20 9.5-3.5 16-10 16-20V11Z"/>
+            <path d="m17 24 5 5 9-10"/>
+          </svg>
+          <h3>Care</h3>
+        </div>
+        <p><strong>Boring data, by design.</strong> We collect the minimum, disclose all
+        of it in plain language, and keep every app aligned with Google&nbsp;Play and
+        AdMob policy from day one — because trust is the only asset a small studio
+        really owns.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <svg class="manifesto-ghost" aria-hidden="true"><use href="#dino-head"/></svg>
+    <div class="wrap">
+      <h2>
+        <span>Effortless apps.</span>
+        <span class="dim">Honest ads.</span>
+        <span>Boring data.</span>
+      </h2>
+      <p>That's the whole playbook. Apps that feel light in the hand, advertising that
+      respects the tap, and data practices dull enough to read over coffee.</p>
+    </div>
+  </section>
+
+  <section id="about" class="section-pad">
+    <div class="wrap about">
+      <div class="about-copy">
+        <h2>A small studio, on purpose.</h2>
+        <p>Bindooa is an independent studio founded in 2026 and based in Vietnam. We
+        publish consumer Android apps — <strong>personalization first</strong>, with
+        utilities on the roadmap.</p>
+        <p>No outside funding and no growth-at-all-costs playbook. Staying small keeps
+        every decision close to the product: the same people who design an app answer
+        the reviews, read the crash logs, and ship the fixes.</p>
+      </div>
+      <ul class="fact-list">
+        <li><span class="k">Founded</span><span class="v">2026</span></li>
+        <li><span class="k">Based in</span><span class="v">Vietnam</span></li>
+        <li><span class="k">Platform</span><span class="v">Android</span></li>
+        <li><span class="k">Focus</span><span class="v">Personalization &amp; utilities</span></li>
+        <li><span class="k">Business model</span><span class="v">Free apps, honest ads</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="contact-card">
+      <svg class="peek" viewBox="0 0 64 64" aria-hidden="true"><use href="#dino-head"/></svg>
+      <div class="contact-in">
+        <div>
+          <h2>Say hello.</h2>
+          <p>Partnerships, press, policy questions, or feedback about one of our apps —
+          one inbox, read by a human.</p>
+        </div>
+        <a class="btn" href="mailto:trungnguyentcg@gmail.com">trungnguyentcg@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top" aria-label="Bindooa home">
+        <svg aria-hidden="true"><use href="#dino-head"/></svg>
+        Bindooa
+      </a>
+      <nav class="foot-links" aria-label="Legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="mailto:trungnguyentcg@gmail.com">Contact</a>
+      </nav>
+    </div>
+    <p class="foot-note">&copy; 2026 Bindooa. All rights reserved.</p>
+  </div>
+</footer>
 </body>
 </html>

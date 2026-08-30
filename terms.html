@@ -4,18 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Service — Bindooa</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='44' y='4' width='6' height='14' rx='3' fill='%231f9d55'/%3E%3Ccircle cx='47' cy='6' r='5' fill='%23c8f542'/%3E%3Crect x='6' y='14' width='52' height='44' rx='15' fill='%232ee06f'/%3E%3Crect x='13' y='26' width='38' height='20' rx='10' fill='%23071a0f'/%3E%3Crect x='20' y='30' width='7' height='12' rx='3.5' fill='%23c8f542'/%3E%3Crect x='37' y='30' width='7' height='12' rx='3.5' fill='%23c8f542'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;margin:0;color:#1f2430;background:#f7f8fa;line-height:1.7}
-  .wrap{max-width:760px;margin:0 auto;padding:48px 24px}
-  h1{font-size:2rem;margin:0 0 4px}
-  .date{color:#8a90a0;margin:0 0 32px;font-size:.9rem}
-  h2{font-size:1.25rem;margin:32px 0 8px}
-  p,li{color:#3a4152}
-  a{color:#2456d6}
-  footer{margin-top:48px;font-size:.9rem;color:#8a90a0}
+  :root{
+    --ground:#06120b;--line:rgba(140,240,175,.14);
+    --text:#eafff2;--text-2:#9fd8b4;--body-c:#c9e8d3;
+    --green:#2ee06f;--lime:#c8f542;
+    --font-display:"Bricolage Grotesque",Georgia,serif;
+    --font-body:"Hanken Grotesk",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-body);background:var(--ground);color:var(--body-c);line-height:1.75;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--lime);color:#06120b}
+  :focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
+  html{scrollbar-width:thin;scrollbar-color:#1f9d55 transparent}
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-thumb{background:#1f9d55;border-radius:99px;border:2px solid var(--ground)}
+  .topbar{border-bottom:1px solid var(--line)}
+  .topbar-in{max-width:760px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+  .brand svg{width:28px;height:28px}
+  .wrap{max-width:760px;margin:0 auto;padding:56px 24px 48px}
+  h1{font-family:var(--font-display);color:var(--text);font-weight:800;font-size:2.4rem;letter-spacing:-.03em;line-height:1.1;margin:0 0 8px}
+  .date{color:var(--text-2);margin:0 0 36px;font-size:.9rem}
+  h2{font-family:var(--font-display);color:var(--text);font-weight:700;font-size:1.32rem;letter-spacing:-.01em;margin:36px 0 10px}
+  p{margin:0 0 14px}
+  ul{padding-left:22px;margin:0 0 14px}
+  li{margin-bottom:6px}
+  strong{color:var(--text)}
+  a{color:var(--green);text-decoration-thickness:1.5px;text-underline-offset:4px}
+  a:hover{color:#43ea80}
+  footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);font-size:.9rem;color:var(--text-2)}
+  footer a{color:var(--text-2)}
 </style>
 </head>
 <body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="44" y="4" width="6" height="14" rx="3" fill="#1f9d55"/><circle cx="47" cy="6" r="5" fill="#c8f542"/><rect x="6" y="14" width="52" height="44" rx="15" fill="#2ee06f"/><rect x="13" y="26" width="38" height="20" rx="10" fill="#071a0f"/><rect x="20" y="30" width="7" height="12" rx="3.5" fill="#c8f542"/><rect x="37" y="30" width="7" height="12" rx="3.5" fill="#c8f542"/></svg>
+      Bindooa
+    </a>
+  </div>
+</header>
 <div class="wrap">
   <h1>Terms of Service</h1>
   <p class="date">Effective date: August 28, 2026</p>
